@@ -1,7 +1,7 @@
-Source: pulseaudio-modules-droid-glue
+Source: pulseaudio-modules-droid-glue-24
 Section: sound
 Priority: optional
-Build-Depends: android-headers (>= 23),
+Build-Depends: android-headers-24,
     debhelper (>= 9),
     check,
     dh-autoreconf,
@@ -18,8 +18,8 @@ Maintainer: Marius Gripsgard <marius@ubports.com>
 Standards-Version: 3.9.5
 Homepage: https://github.com/ubports/pulseaudio-modules-droid-glue
 
-Package: pulseaudio-modules-droid-glue
+Package: pulseaudio-modules-droid-glue-24
 Architecture: armhf arm64 amd64
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-Description: PulseAudio Droid HAL glue module.
+Description: PulseAudio Droid HAL glue module (built against Android headers 24).
