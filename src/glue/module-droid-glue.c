@@ -63,14 +63,11 @@ static const char* const valid_modargs[] = {
     NULL,
 };
 
-#define AF_LIB32 LIB_AF_BASE_PATH "/lib/" LIB_AF_NAME
-#define AF_LIB64 LIB_AF_BASE_PATH "/lib64/" LIB_AF_NAME
-
-static const char* const lib_paths[] = {
-    AF_LIB32,
-    AF_LIB64,
-    NULL
-};
+#if defined(__LP64__)
+# define AF_LIB LIB_AF_BASE_PATH "/lib64/" LIB_AF_NAME
+#else
+# define AF_LIB LIB_AF_BASE_PATH "/lib/" LIB_AF_NAME
+#endif
 
 #define DEFAULT_MODULE_ID "primary"
 
@@ -127,19 +124,6 @@ static bool file_exists(const char *path) {
     return access(path, F_OK) == 0 ? true : false;
 }
 
-static const char *detect_lib_path(void) {
-    int i;
-
-    for (i = 0; lib_paths[i]; i++) {
-        bool found = file_exists(lib_paths[i]);
-        pa_log_debug("look for %s...%s", lib_paths[i], found ? "found" : "no");
-        if (found)
-            return lib_paths[i];
-    }
-
-    return NULL;
-}
-
 int pa__init(pa_module *m) {
     pa_modargs *ma = NULL;
     const char *module_id;
@@ -159,7 +143,7 @@ int pa__init(pa_module *m) {
             goto fail;
         }
     } else
-        lib_path = detect_lib_path();
+        lib_path = AF_LIB;
 
     if (!lib_path) {
         pa_log("Could not find audioflingerglue library.");
