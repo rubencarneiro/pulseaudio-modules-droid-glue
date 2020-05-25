@@ -1,3 +1,11 @@
+pulseaudio-modules-droid-glue (0.1+ubports1) xenial; urgency=medium
+
+  * Source package renamed to be more generic.
+  * Build multiple binaries for multiple Android package from a single
+    source package.
+
+ -- Ratchanan Srirattanamet <ratchanan@ubports.com>  Tue, 26 May 2020 01:50:16 +0700
+
 pulseaudio-modules-droid-glue-24 (0.1) xenial; urgency=medium
 
   * Initial release.
