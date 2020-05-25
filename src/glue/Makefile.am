@@ -13,11 +13,11 @@ AM_CFLAGS = \
 	-I$(top_srcdir)/src/glue
 
 
-modlibexec_LTLIBRARIES = module-droid-glue.la
+modlibexec_LTLIBRARIES = module-droid-glue$(DROID_MODULE_SUFFIX).la
 
 noinst_HEADERS = module-symdef-compat.h
 
-module_droid_glue_la_SOURCES = /usr/share/audioflingerglue/hybris.c module-droid-glue.c
-module_droid_glue_la_LDFLAGS = -module -avoid-version -Wl,-no-undefined -Wl,-z,noexecstack -lhybris-common
-module_droid_glue_la_LIBADD = $(AM_LIBADD) -lm
-module_droid_glue_la_CFLAGS = $(AM_CFLAGS) -I/usr/include/audioflingerglue -DPA_MODULE_NAME=module_droid_glue
+module_droid_glue__DROID_MODULE_SUFFIX__la_SOURCES = /usr/share/audioflingerglue/hybris.c module-droid-glue.c
+module_droid_glue__DROID_MODULE_SUFFIX__la_LDFLAGS = -module -avoid-version -Wl,-no-undefined -Wl,-z,noexecstack -lhybris-common
+module_droid_glue__DROID_MODULE_SUFFIX__la_LIBADD = $(AM_LIBADD) -lm
+module_droid_glue__DROID_MODULE_SUFFIX__la_CFLAGS = $(AM_CFLAGS) -I/usr/include/audioflingerglue -DPA_MODULE_NAME=module_droid_glue$(subst -,_,$(DROID_MODULE_SUFFIX))

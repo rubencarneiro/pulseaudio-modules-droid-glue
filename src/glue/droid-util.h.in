@@ -1,0 +1,2 @@
+/* Forward to the correct droid header, with the help from autoconf. */
+#include <droid@DROID_MODULE_SUFFIX@/droid-util.h>

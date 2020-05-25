@@ -42,7 +42,12 @@
 #include <pulsecore/log.h>
 #include <pulsecore/macro.h>
 
-#include <droid/droid-util.h>
+/*
+ * Because the name of the droid module can change according to the module
+ * suffix, use the forwarding header which will have the correct name filled
+ * by autoconf.
+ */
+#include "droid-util.h"
 
 #include "module-symdef-compat.h"
 

@@ -174,14 +174,28 @@ AC_SUBST(PULSEAUDIO_LIBS)
 
 pulseaudiodir=`pkg-config --variable=prefix pulsecore`
 
-PKG_CHECK_MODULES([DROIDHEADERS], [android-headers])
+AC_ARG_WITH([android-headers],
+        AS_HELP_STRING([--with-android-headers], [Allow specifying custom android headers package (default: android-headers)]),
+        [androidheaderspkg=$withval], [androidheaderspkg="android-headers"])
+
+PKG_CHECK_MODULES([DROIDHEADERS], [$androidheaderspkg])
 AC_SUBST(DROIDHEADERS_CFLAGS)
 
 PKG_CHECK_MODULES([HYBRIS], [libhardware >= 0.1.0])
 AC_SUBST(HYBRIS_CFLAGS)
 AC_SUBST(HYBRIS_LIBS)
 
-PKG_CHECK_MODULES([DROIDUTIL], [libdroid-util >= 6.0.41])
+AC_ARG_WITH([module-suffix],
+        AS_HELP_STRING([--with-module-suffix], [Allow specifying suffixes to all modules and libraries. "-" will be included automatically. Also used to determine droid-util suffix. (default: none)]),
+        [modulesuffix="${withval}"], [modulesuffix=""])
+
+AS_IF([test "$modulesuffix" = ""],[
+    AC_SUBST([DROID_MODULE_SUFFIX], [""])
+], [
+    AC_SUBST([DROID_MODULE_SUFFIX], ["-${modulesuffix}"])
+])
+
+PKG_CHECK_MODULES([DROIDUTIL], [libdroid-util${DROID_MODULE_SUFFIX} >= 6.0.41])
 AC_SUBST(DROIDUTIL_CFLAGS)
 AC_SUBST(DROIDUTIL_LIBS)
 
@@ -238,6 +252,7 @@ AC_CONFIG_FILES([
 Makefile
 src/Makefile
 src/glue/Makefile
+src/glue/droid-util.h
 ])
 
 AC_OUTPUT
