@@ -14,5 +14,5 @@ override_dh_shlibdeps:
 
 override_dh_auto_install:
 	dh_auto_install
-	mv debian/pulseaudio-modules-droid-glue-24/usr/lib/pulse-8.0/modules/module-droid-glue.so debian/pulseaudio-modules-droid-glue-24/usr/lib/pulse-8.0/modules/module-droid-glue-24.so
-	rm debian/pulseaudio-modules-droid-glue-24/usr/lib/pulse-8.0/modules/*.la
+
+	rm debian/pulseaudio-modules-droid-glue/usr/lib/pulse-8.0/modules/*.la
