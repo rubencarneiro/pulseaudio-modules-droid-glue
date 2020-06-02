@@ -15,9 +15,9 @@ AM_CFLAGS = \
 
 modlibexec_LTLIBRARIES = module-droid-glue.la
 
-noinst_HEADERS = module-droid-glue-symdef.h
+noinst_HEADERS = module-symdef-compat.h
 
 module_droid_glue_la_SOURCES = /usr/share/audioflingerglue/hybris.c module-droid-glue.c
 module_droid_glue_la_LDFLAGS = -module -avoid-version -Wl,-no-undefined -Wl,-z,noexecstack -lhybris-common
 module_droid_glue_la_LIBADD = $(AM_LIBADD) -lm
-module_droid_glue_la_CFLAGS = $(AM_CFLAGS) -I/usr/include/audioflingerglue
+module_droid_glue_la_CFLAGS = $(AM_CFLAGS) -I/usr/include/audioflingerglue -DPA_MODULE_NAME=module_droid_glue
